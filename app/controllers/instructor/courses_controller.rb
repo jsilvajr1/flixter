@@ -16,17 +16,18 @@ class Instructor::CoursesController < ApplicationController
   end
 
   def show
-    
+  @section = Section.new
+  @lesson = Lesson.new  
   end
-  
+
   private
-  
+
   def require_authorized_for_current_course
     if current_course.user != current_user
       render plain: "Unauthorized", status: :unauthorized
     end
   end
-  
+
   helper_method :current_course
   def current_course
     @current_course ||= Course.find(params[:id])
